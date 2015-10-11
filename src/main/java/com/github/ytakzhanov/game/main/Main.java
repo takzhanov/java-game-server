@@ -1,5 +1,6 @@
 package com.github.ytakzhanov.game.main;
 
+import com.github.ytakzhanov.game.frontend.AdminPageServlet;
 import com.github.ytakzhanov.game.frontend.SignInServlet;
 import com.github.ytakzhanov.game.frontend.SignUpServlet;
 import com.github.ytakzhanov.game.service.AccountService;
@@ -29,10 +30,11 @@ public class Main {
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(signIn), "/api/v1/auth/signin");
         context.addServlet(new ServletHolder(signUp), "/api/v1/auth/signup");
+        context.addServlet(new ServletHolder(new AdminPageServlet()), AdminPageServlet.ADMIN_PAGE_URL);
 
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setDirectoriesListed(true);
-        resourceHandler.setResourceBase("public_html");
+        resourceHandler.setResourceBase("src/main/resources/static");
 
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resourceHandler, context});
