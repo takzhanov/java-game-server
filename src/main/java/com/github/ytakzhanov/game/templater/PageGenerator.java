@@ -11,7 +11,7 @@ import java.io.Writer;
 import java.util.Map;
 
 public class PageGenerator {
-    private static final String HTML_DIR = "src/main/resources/templates";
+    private static final String HTML_DIR = "templates";
     private static final Configuration CFG = new Configuration();
 
     public static String getPage(String fileName, Map<String, Object> pageVariables) {
