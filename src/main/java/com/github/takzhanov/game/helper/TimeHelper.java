@@ -1,4 +1,4 @@
-package com.github.ytakzhanov.game.helper;
+package com.github.takzhanov.game.helper;
 
 public class TimeHelper {
     public static void sleep(int timeMS) {

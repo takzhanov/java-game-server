@@ -1,4 +1,4 @@
-package com.github.ytakzhanov.game.main;
+package com.github.takzhanov.game.main;
 
 public class UserProfile {
     private String login;

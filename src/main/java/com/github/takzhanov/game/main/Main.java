@@ -1,9 +1,9 @@
-package com.github.ytakzhanov.game.main;
+package com.github.takzhanov.game.main;
 
-import com.github.ytakzhanov.game.frontend.AdminPageServlet;
-import com.github.ytakzhanov.game.frontend.SignInServlet;
-import com.github.ytakzhanov.game.frontend.SignUpServlet;
-import com.github.ytakzhanov.game.service.AccountService;
+import com.github.takzhanov.game.frontend.AdminPageServlet;
+import com.github.takzhanov.game.frontend.SignInServlet;
+import com.github.takzhanov.game.frontend.SignUpServlet;
+import com.github.takzhanov.game.service.AccountService;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;

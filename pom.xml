@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.ytakzhanov</groupId>
+    <groupId>com.github.takzhanov</groupId>
     <artifactId>java-game-server</artifactId>
     <version>1.0</version>
 
@@ -12,8 +12,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <org.eclipse.jetty.version>9.3.4.v20151007</org.eclipse.jetty.version>
-        <org.freemarker.version>2.3.20</org.freemarker.version>
+        <org.eclipse.jetty.version>9.3.7.v20160115</org.eclipse.jetty.version>
+        <org.freemarker.version>2.3.23</org.freemarker.version>
     </properties>
 
     <dependencies>
@@ -39,7 +39,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.github.ytakzhanov.game.main.Main</mainClass>
+                            <mainClass>com.github.takzhanov.game.main.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

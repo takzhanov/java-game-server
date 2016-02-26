@@ -1,6 +1,6 @@
-package com.github.ytakzhanov.game.frontend;
+package com.github.takzhanov.game.frontend;
 
-import com.github.ytakzhanov.game.templater.PageGenerator;
+import com.github.takzhanov.game.templater.PageGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

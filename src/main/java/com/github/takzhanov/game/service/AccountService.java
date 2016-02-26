@@ -1,6 +1,6 @@
-package com.github.ytakzhanov.game.service;
+package com.github.takzhanov.game.service;
 
-import com.github.ytakzhanov.game.main.UserProfile;
+import com.github.takzhanov.game.main.UserProfile;
 
 import java.util.HashMap;
 import java.util.Map;

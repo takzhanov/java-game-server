@@ -1,4 +1,4 @@
-package com.github.ytakzhanov.game.templater;
+package com.github.takzhanov.game.templater;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
