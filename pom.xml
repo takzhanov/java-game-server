@@ -14,6 +14,8 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <org.eclipse.jetty.version>9.3.7.v20160115</org.eclipse.jetty.version>
         <org.freemarker.version>2.3.23</org.freemarker.version>
+        <org.slf4j.version>1.7.18</org.slf4j.version>
+        <org.apache.logging.log4j.version>2.5</org.apache.logging.log4j.version>
     </properties>
 
     <dependencies>
@@ -27,6 +29,22 @@
             <artifactId>freemarker</artifactId>
             <version>${org.freemarker.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${org.apache.logging.log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${org.apache.logging.log4j.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

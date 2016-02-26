@@ -2,6 +2,8 @@ package com.github.takzhanov.game.frontend;
 
 import com.github.takzhanov.game.helper.TimeHelper;
 import com.github.takzhanov.game.templater.PageGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AdminPageServlet extends HttpServlet {
+    final static Logger logger = LoggerFactory.getLogger(AdminPageServlet.class);
     public static final String ADMIN_PAGE_URL = "/admin";
 
     public void doGet(HttpServletRequest request,
@@ -22,9 +25,9 @@ public class AdminPageServlet extends HttpServlet {
         String timeString = request.getParameter("shutdown");
         if (timeString != null) {
             int timeMS = Integer.valueOf(timeString);
-            System.out.print("Server will be down after: " + timeMS + " ms");
+            logger.info("Server will be down after: " + timeMS + " ms");
             TimeHelper.sleep(timeMS);
-            System.out.print("\nShutdown");
+            logger.info("\nShutdown");
             System.exit(0);
         }
         pageVariables.put("status", "run");
