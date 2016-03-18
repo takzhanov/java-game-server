@@ -1,6 +1,6 @@
-package com.github.takzhanov.game.frontend;
+package com.github.takzhanov.game.servlets;
 
-import com.github.takzhanov.game.main.UserProfile;
+import com.github.takzhanov.game.domain.UserProfile;
 import com.github.takzhanov.game.service.AccountService;
 import com.github.takzhanov.game.templater.PageGenerator;
 

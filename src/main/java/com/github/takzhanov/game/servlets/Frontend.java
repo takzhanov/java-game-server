@@ -1,4 +1,4 @@
-package com.github.takzhanov.game.frontend;
+package com.github.takzhanov.game.servlets;
 
 import com.github.takzhanov.game.templater.PageGenerator;
 

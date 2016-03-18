@@ -1,4 +1,2 @@
-#!/bin/bash
-rm *.jar
+#!/usr/bin/env bash
 mvn compile assembly:single
-mv ./target/java-game-server-1.0-jar-with-dependencies.jar ./

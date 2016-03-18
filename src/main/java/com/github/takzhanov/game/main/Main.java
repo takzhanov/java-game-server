@@ -1,9 +1,11 @@
 package com.github.takzhanov.game.main;
 
-import com.github.takzhanov.game.frontend.AdminPageServlet;
-import com.github.takzhanov.game.frontend.SignInServlet;
-import com.github.takzhanov.game.frontend.SignUpServlet;
 import com.github.takzhanov.game.service.AccountService;
+import com.github.takzhanov.game.service.AccountServiceImpl;
+import com.github.takzhanov.game.servlets.AdminPageServlet;
+import com.github.takzhanov.game.servlets.MirrorServlet;
+import com.github.takzhanov.game.servlets.SignInServlet;
+import com.github.takzhanov.game.servlets.SignUpServlet;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -12,8 +14,6 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.servlet.Servlet;
 
 public class Main {
     final static Logger logger = LoggerFactory.getLogger(Main.class);
@@ -26,14 +26,12 @@ public class Main {
         }
         logger.info("Starting at port: {}", String.valueOf(port));
 
-        AccountService accountService = new AccountService();
-
-        Servlet signIn = new SignInServlet(accountService);
-        Servlet signUp = new SignUpServlet(accountService);
+        AccountService accountService = new AccountServiceImpl();
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.addServlet(new ServletHolder(signIn), "/api/v1/auth/signin");
-        context.addServlet(new ServletHolder(signUp), "/api/v1/auth/signup");
+        context.addServlet(new ServletHolder(new MirrorServlet()), "/mirror");
+        context.addServlet(new ServletHolder(new SignInServlet(accountService)), "/api/v1/auth/signin");
+        context.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/api/v1/auth/signup");
         context.addServlet(new ServletHolder(new AdminPageServlet()), AdminPageServlet.ADMIN_PAGE_URL);
 
         ResourceHandler resourceHandler = new ResourceHandler();
@@ -47,6 +45,7 @@ public class Main {
         server.setHandler(context);
 
         server.start();
+        logger.info("Server started");
         server.join();
     }
 }

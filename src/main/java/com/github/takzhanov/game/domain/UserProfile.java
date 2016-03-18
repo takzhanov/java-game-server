@@ -1,9 +1,9 @@
-package com.github.takzhanov.game.main;
+package com.github.takzhanov.game.domain;
 
 public class UserProfile {
-    private String login;
-    private String password;
-    private String email;
+    private final String login;
+    private final String password;
+    private final String email;
 
     public UserProfile(String login, String password, String email) {
         this.login = login;
