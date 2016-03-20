@@ -2,7 +2,6 @@ package com.github.takzhanov.game.servlets;
 
 import com.github.takzhanov.game.domain.UserProfile;
 import com.github.takzhanov.game.service.AccountService;
-import com.github.takzhanov.game.templater.PageGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,36 +17,44 @@ public class SignInServlet extends HttpServlet {
     public SignInServlet(AccountService accountService) {
         this.accountService = accountService;
     }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
-
-        response.setStatus(HttpServletResponse.SC_OK);
-
-        Map<String, Object> pageVariables = new HashMap<>();
-        UserProfile profile = accountService.getUser(name);
-        if (profile != null && profile.getPassword().equals(password)) {
-            pageVariables.put("loginStatus", "Login passed");
-        } else {
-            pageVariables.put("loginStatus", "Wrong login/password");
-        }
-
-        response.getWriter().println(PageGenerator.getPage("authstatus.html", pageVariables));
-    }
+//
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        String name = request.getParameter("name");
+//        String password = request.getParameter("password");
+//
+//        response.setStatus(HttpServletResponse.SC_OK);
+//
+//        Map<String, Object> pageVariables = new HashMap<>();
+//        UserProfile profile = accountService.getUser(name);
+//        if (profile != null && profile.getPassword().equals(password)) {
+//            pageVariables.put("loginStatus", "Login passed");
+//        } else {
+//            pageVariables.put("loginStatus", "Wrong login/password");
+//        }
+//
+//        response.getWriter().println(PageGenerator.getPage("authstatus.html", pageVariables));
+//    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
+        String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        response.setStatus(HttpServletResponse.SC_OK);
+        UserProfile user = accountService.getUser(login);
+        if (user != null && user.getPassword().equals(password)) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.getWriter().println("Authorized: login");
+        } else {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().println("Unauthorized");
+        }
 
         Map<String, Object> pageVariables = new HashMap<>();
         pageVariables.put("email", email == null ? "" : email);
         pageVariables.put("password", password == null ? "" : password);
 
-        response.getWriter().println(PageGenerator.getPage("authresponse.txt", pageVariables));
+//        response.getWriter().println(PageGenerator.getPage("authresponse.txt", pageVariables));
     }
 }

@@ -38,10 +38,11 @@ public class SignUpServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
+        String login = request.getParameter("login");
         String password = request.getParameter("password");
 
         Map<String, Object> pageVariables = new HashMap<>();
-        if (accountService.addUser(name, new UserProfile(name, password, ""))) {
+        if (accountService.addUser(login, new UserProfile(login, password, ""))) {
             pageVariables.put("signUpStatus", "New user created");
         } else {
             pageVariables.put("signUpStatus", "User with name: " + name + " already exists");
