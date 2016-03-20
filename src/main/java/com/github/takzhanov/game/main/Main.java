@@ -30,8 +30,10 @@ public class Main {
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new MirrorServlet()), "/mirror");
-        context.addServlet(new ServletHolder(new SignInServlet(accountService)), "/api/v1/auth/signin");
-        context.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/api/v1/auth/signup");
+//        context.addServlet(new ServletHolder(new SignInServlet(accountService)), "/api/v1/auth/signin");
+        context.addServlet(new ServletHolder(new SignInServlet(accountService)), "/signin");
+//        context.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/api/v1/auth/signup");
+        context.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/signup");
         context.addServlet(new ServletHolder(new AdminPageServlet()), AdminPageServlet.ADMIN_PAGE_URL);
 
         ResourceHandler resourceHandler = new ResourceHandler();
