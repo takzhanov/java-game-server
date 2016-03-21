@@ -3,10 +3,7 @@ package com.github.takzhanov.game.main;
 import com.github.takzhanov.game.db.DbServiceImpl;
 import com.github.takzhanov.game.service.AccountService;
 import com.github.takzhanov.game.service.DbAccountServiceImpl;
-import com.github.takzhanov.game.servlets.AdminPageServlet;
-import com.github.takzhanov.game.servlets.MirrorServlet;
-import com.github.takzhanov.game.servlets.SignInServlet;
-import com.github.takzhanov.game.servlets.SignUpServlet;
+import com.github.takzhanov.game.servlets.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerList;
@@ -31,6 +28,7 @@ public class Main {
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new MirrorServlet()), "/mirror");
+        context.addServlet(new ServletHolder(new WebSocketEchoChatServlet()), "/chat");
 //        context.addServlet(new ServletHolder(new SignInServlet(accountService)), "/api/v1/auth/signin");
         context.addServlet(new ServletHolder(new SignInServlet(accountService)), "/signin");
 //        context.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/api/v1/auth/signup");
