@@ -1,7 +1,8 @@
 package com.github.takzhanov.game.main;
 
+import com.github.takzhanov.game.db.DbServiceImpl;
 import com.github.takzhanov.game.service.AccountService;
-import com.github.takzhanov.game.service.AccountServiceImpl;
+import com.github.takzhanov.game.service.DbAccountServiceImpl;
 import com.github.takzhanov.game.servlets.AdminPageServlet;
 import com.github.takzhanov.game.servlets.MirrorServlet;
 import com.github.takzhanov.game.servlets.SignInServlet;
@@ -15,9 +16,6 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-
 public class Main {
     final static Logger logger = LoggerFactory.getLogger(Main.class);
 
@@ -29,15 +27,7 @@ public class Main {
         }
         logger.info("Starting at port: {}", String.valueOf(port));
 
-        Connection c = null;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
-        } finally {
-            c.close();
-        }
-
-        AccountService accountService = new AccountServiceImpl();
+        AccountService accountService = new DbAccountServiceImpl(new DbServiceImpl());
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new MirrorServlet()), "/mirror");
