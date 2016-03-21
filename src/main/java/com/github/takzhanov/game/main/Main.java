@@ -15,6 +15,9 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 public class Main {
     final static Logger logger = LoggerFactory.getLogger(Main.class);
 
@@ -25,6 +28,14 @@ public class Main {
             port = Integer.valueOf(portString);
         }
         logger.info("Starting at port: {}", String.valueOf(port));
+
+        Connection c = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+        } finally {
+            c.close();
+        }
 
         AccountService accountService = new AccountServiceImpl();
 
