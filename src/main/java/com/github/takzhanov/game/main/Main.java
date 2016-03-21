@@ -43,7 +43,7 @@ public class Main {
         handlers.setHandlers(new Handler[]{resourceHandler, context});
 
         Server server = new Server(port);
-        server.setHandler(context);
+        server.setHandler(handlers);
 
         server.start();
         logger.info("Server started");
