@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DbAccountServiceImpl implements AccountService {
+    private int usersLimit = 10;
+    private int usersCount;
+
     //пользовательской базы
     private DbServiceImpl dbService;
     //текущие сессии пользователей
@@ -29,5 +32,20 @@ public class DbAccountServiceImpl implements AccountService {
     @Override
     public UserProfile getSession(String sessionId) {
         return sessions.get(sessionId);
+    }
+
+    @Override
+    public int getUsersLimit() {
+        return this.usersLimit;
+    }
+
+    @Override
+    public void setUsersLimit(int usersLimit) {
+        this.usersLimit = usersLimit >= 0 ? usersLimit : 0;
+    }
+
+    @Override
+    public int getUsersCount() {
+        return this.usersCount;
     }
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="5 seconds">
+    <!--<property name="log_dir">-->
+    <!--out/%d{yyyy_MM_dd_HH_mm_ss}-->
+    <!--</property>-->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender" target="System.out">
+        <encoder charset="UTF-8">
+            <pattern>[%d{MM-dd HH:mm:ss,SSS}, %r] %c %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--<appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--<File>${log_dir}/server.log</File>-->
+    <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+    <!--<fileNamePattern>${log_dir}/server_%i.log</fileNamePattern>-->
+    <!--</rollingPolicy>-->
+    <!--<encoder>-->
+    <!--<pattern>[%d{MM-dd HH:mm:ss,SSS}, %r] %c %m%n</pattern>-->
+    <!--</encoder>-->
+    <!--</appender>-->
+
+    <appender name="queue" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>10000</queueSize>
+        <appender-ref ref="Console"/>
+        <!--<appender-ref ref="RollingFile"/>-->
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="queue"/>
+    </root>
+</configuration>

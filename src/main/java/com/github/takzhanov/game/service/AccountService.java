@@ -9,4 +9,9 @@ public interface AccountService {
 
     UserProfile getSession(String sessionId);
 
+    int getUsersLimit();
+
+    void setUsersLimit(int usersLimit);
+
+    int getUsersCount();
 }

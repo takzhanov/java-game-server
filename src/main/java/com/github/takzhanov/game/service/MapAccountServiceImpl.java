@@ -5,7 +5,7 @@ import com.github.takzhanov.game.domain.UserProfile;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AccountServiceImpl implements AccountService {
+public class MapAccountServiceImpl implements AccountService {
     //имитация пользовательской базы
     private Map<String, UserProfile> users = new HashMap<>();
     //текущие сессии пользователей
@@ -29,5 +29,20 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public UserProfile getSession(String sessionId) {
         return sessions.get(sessionId);
+    }
+
+    @Override
+    public int getUsersLimit() {
+        return 0;
+    }
+
+    @Override
+    public void setUsersLimit(int usersLimit) {
+
+    }
+
+    @Override
+    public int getUsersCount() {
+        return users.size();
     }
 }
