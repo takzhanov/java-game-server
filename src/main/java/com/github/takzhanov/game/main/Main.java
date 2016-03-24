@@ -1,10 +1,7 @@
 package com.github.takzhanov.game.main;
 
 import com.github.takzhanov.game.db.DbServiceImpl;
-import com.github.takzhanov.game.service.AccountService;
-import com.github.takzhanov.game.service.AccountUserController;
-import com.github.takzhanov.game.service.AccountUserControllerMBean;
-import com.github.takzhanov.game.service.DbAccountServiceImpl;
+import com.github.takzhanov.game.service.*;
 import com.github.takzhanov.game.servlets.*;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -39,6 +36,9 @@ public class Main {
         ObjectName name = new ObjectName("Admin:type=AccountServerController.usersLimit");
         mbs.registerMBean(serverStatistics, name);
 
+        ResourceService resourceService = new ResourceService();
+        mbs.registerMBean(resourceService, new ObjectName("Admin:type=ResourceServerController"));
+
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new MirrorServlet()), "/mirror");
         context.addServlet(new ServletHolder(new WebSocketEchoChatServlet()), "/chat");
@@ -46,7 +46,8 @@ public class Main {
         context.addServlet(new ServletHolder(new SignInServlet(accountService)), "/signin");
 //        context.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/api/v1/auth/signup");
         context.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/signup");
-        context.addServlet(new ServletHolder(new AdminPageServlet(accountService)), AdminPageServlet.ADMIN_PAGE_URL);
+        context.addServlet(new ServletHolder(new AdminPageServlet(accountService)), AdminPageServlet.PAGE_URL);
+        context.addServlet(new ServletHolder(new ResourceServlet(resourceService)), ResourceServlet.PAGE_URL);
 
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setDirectoriesListed(true);

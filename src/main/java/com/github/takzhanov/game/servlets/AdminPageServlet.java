@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class AdminPageServlet extends HttpServlet {
     final static Logger logger = LoggerFactory.getLogger(AdminPageServlet.class);
-    public static final String ADMIN_PAGE_URL = "/admin";
+    public static final String PAGE_URL = "/admin";
 
     private AccountService accountService;
 
