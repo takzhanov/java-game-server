@@ -1,5 +1,6 @@
 package com.github.takzhanov.game.main;
 
+import com.github.takzhanov.game.db.DbService;
 import com.github.takzhanov.game.db.DbServiceImpl;
 import com.github.takzhanov.game.service.*;
 import com.github.takzhanov.game.servlets.*;
@@ -27,14 +28,14 @@ public class Main {
         }
         logger.info("Starting at port: {}", String.valueOf(port));
 
-        DbServiceImpl dbService = new DbServiceImpl();
+        DbService dbService = new DbServiceImpl();
         dbService.printConnectionInfo();
         AccountService accountService = new DbAccountServiceImpl(dbService);
 
-        AccountUserControllerMBean serverStatistics = new AccountUserController(accountService);
+        AccountUserControllerMBean statServer = new AccountUserController(accountService);
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         ObjectName name = new ObjectName("Admin:type=AccountServerController.usersLimit");
-        mbs.registerMBean(serverStatistics, name);
+        mbs.registerMBean(statServer, name);
 
         ResourceService resourceService = new ResourceService();
         mbs.registerMBean(resourceService, new ObjectName("Admin:type=ResourceServerController"));
@@ -48,6 +49,7 @@ public class Main {
         context.addServlet(new ServletHolder(new SignUpServlet(accountService)), "/signup");
         context.addServlet(new ServletHolder(new AdminPageServlet(accountService)), AdminPageServlet.PAGE_URL);
         context.addServlet(new ServletHolder(new ResourceServlet(resourceService)), ResourceServlet.PAGE_URL);
+        context.addServlet(new ServletHolder(new Frontend()), Frontend.PAGE_URL);
 
         ResourceHandler resourceHandler = new ResourceHandler();
         resourceHandler.setDirectoriesListed(true);

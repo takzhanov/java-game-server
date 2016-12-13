@@ -38,6 +38,7 @@ public class DbServiceImpl implements DbService {
         }
     }
 
+    @Override
     public UserProfile getUser(long id) throws DbException {
         try {
             return (new UsersDao(connection).getById(id));
@@ -46,6 +47,7 @@ public class DbServiceImpl implements DbService {
         }
     }
 
+    @Override
     public UserProfile findUserByLogin(String login) throws DbException {
         try {
             UsersDao dao = new UsersDao(connection);
@@ -55,6 +57,7 @@ public class DbServiceImpl implements DbService {
         }
     }
 
+    @Override
     public long addUser(UserProfile userProfile) throws DbException {
         try {
             connection.setAutoCommit(false);

@@ -1,6 +1,6 @@
 package com.github.takzhanov.game.service;
 
-import com.github.takzhanov.game.db.DbServiceImpl;
+import com.github.takzhanov.game.db.DbService;
 import com.github.takzhanov.game.domain.UserProfile;
 
 import java.util.HashMap;
@@ -11,11 +11,11 @@ public class DbAccountServiceImpl implements AccountService {
     private int usersCount;
 
     //пользовательской базы
-    private DbServiceImpl dbService;
+    private DbService dbService;
     //текущие сессии пользователей
     private Map<String, UserProfile> sessions = new HashMap<>();
 
-    public DbAccountServiceImpl(DbServiceImpl dbService) {
+    public DbAccountServiceImpl(DbService dbService) {
         this.dbService = dbService;
     }
 

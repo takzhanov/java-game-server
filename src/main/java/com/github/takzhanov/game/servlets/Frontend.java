@@ -12,14 +12,14 @@ import java.util.Map;
 
 public class Frontend extends HttpServlet {
 
+    public static final String PAGE_URL = "/authform";
     private String login = "";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> pageVariables = new HashMap<>();
         pageVariables.put("lastLogin", login == null ? "" : login);
-
-        resp.getWriter().println(PageGenerator.getPage("authform.html", pageVariables));
+        resp.getWriter().println(PageGenerator.getPage("authform.tml", pageVariables));
         resp.setContentType("text/html;charset=utf-8");
         resp.setStatus(HttpServletResponse.SC_OK);
     }
@@ -37,6 +37,6 @@ public class Frontend extends HttpServlet {
 
         Map<String, Object> pageVariables = new HashMap<>();
         pageVariables.put("lastLogin", login == null ? "" : login);
-        resp.getWriter().println(PageGenerator.getPage("authform.html", pageVariables));
+        resp.getWriter().println(PageGenerator.getPage("authform.tml", pageVariables));
     }
 }
