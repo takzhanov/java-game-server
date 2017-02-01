@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Info page</title>
+</head>
+<body>
+<h3>Info page</h3>
+
+<p>method: ${method}</p>
+<p>URL: ${URL}</p>
+<p>pathInfo: ${pathInfo!}</p>
+<p>sessionId: ${sessionId!}</p>
+<p>parameters: ${parameters!}</p>
+<p>key: ${key!}</p>
+<p>message: ${message!}</p>
+
+</body>
+</html>

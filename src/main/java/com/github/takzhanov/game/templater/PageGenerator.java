@@ -19,6 +19,10 @@ public class PageGenerator {
         return pageGenerator;
     }
 
+    public static String getPage(String fileName) {
+        return getPage(fileName, null);
+    }
+
     public static String getPage(String fileName, Map<String, Object> pageVariables) {
         Writer stream = new StringWriter();
         try {

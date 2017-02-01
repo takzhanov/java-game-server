@@ -51,7 +51,8 @@ public class DbServiceImpl implements DbService {
     public UserProfile findUserByLogin(String login) throws DbException {
         try {
             UsersDao dao = new UsersDao(connection);
-            return dao.getById(dao.findIdByLogin(login));
+            Long id = dao.findIdByLogin(login);
+            return id != null ? dao.getById(id) : null;
         } catch (SQLException e) {
             throw new DbException(e);
         }

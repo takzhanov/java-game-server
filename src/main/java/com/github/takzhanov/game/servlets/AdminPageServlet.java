@@ -28,15 +28,18 @@ public class AdminPageServlet extends HttpServlet {
                       HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
-        Map<String, Object> pageVariables = new HashMap<>();
         String timeString = request.getParameter("shutdown");
         if (timeString != null) {
+            logger.info("Bye-bye!");
+            response.getWriter().println(PageGenerator.getPage("bye.html"));
+            response.flushBuffer();
             int timeMS = Integer.valueOf(timeString);
             logger.info("Server will be down after: " + timeMS + " ms");
             TimeHelper.sleep(timeMS);
-            logger.info("\nShutdown");
+            logger.info("Shutdown");
             System.exit(0);
         }
+        Map<String, Object> pageVariables = new HashMap<>();
         pageVariables.put("status", "run");
         response.getWriter().println(PageGenerator.getPage("admin.tml", pageVariables));
         response.getWriter().println(accountService.getUsersLimit());

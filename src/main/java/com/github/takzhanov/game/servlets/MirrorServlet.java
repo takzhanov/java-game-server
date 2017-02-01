@@ -13,33 +13,24 @@ import java.util.Map;
 public class MirrorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<String, Object> pageVariables = createPageVariablesMap(request);
-        pageVariables.put("message", "");
-
-        response.getWriter().println(request.getParameter("key") == null ? "" : request.getParameter("key"));
-//        response.getWriter().println(PageGenerator.instance().getPage("page.html", pageVariables));
-
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
+        response.getWriter().println(request.getParameter("key") == null ? "" : request.getParameter("key"));
     }
 
     @Override
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
         Map<String, Object> pageVariables = createPageVariablesMap(request);
-
         String message = request.getParameter("message");
-
         response.setContentType("text/html;charset=utf-8");
-
         if (message == null || message.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         } else {
             response.setStatus(HttpServletResponse.SC_OK);
         }
         pageVariables.put("message", message == null ? "" : message);
-
-        response.getWriter().println(PageGenerator.getPage("page.html", pageVariables));
+        response.getWriter().println(PageGenerator.getPage("info.tml", pageVariables));
     }
 
     private static Map<String, Object> createPageVariablesMap(HttpServletRequest request) {

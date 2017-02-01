@@ -42,14 +42,15 @@ public class SignUpServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         Map<String, Object> pageVariables = new HashMap<>();
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("text/html;charset=utf-8");
         if (accountService.addUser(new UserProfile(-1, login, password, ""))) {
             pageVariables.put("signUpStatus", "New user created");
+            response.getWriter().println(PageGenerator.getPage("signupstatus.html", pageVariables));
         } else {
-            pageVariables.put("signUpStatus", "User with name: " + name + " already exists");
+            pageVariables.put("signUpStatus", "User with login: " + login + " already exists");
+            response.sendRedirect("login.html");
         }
-
-        response.getWriter().println(PageGenerator.getPage("signupstatus.html", pageVariables));
-        response.setStatus(HttpServletResponse.SC_OK);
     }
 
 }

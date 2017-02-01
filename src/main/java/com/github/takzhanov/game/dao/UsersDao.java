@@ -1,7 +1,9 @@
 package com.github.takzhanov.game.dao;
 
+import com.github.takzhanov.game.db.NotFoundException;
 import com.github.takzhanov.game.domain.UserProfile;
 import com.github.takzhanov.game.executor.QueryExecutor;
+import com.sun.istack.internal.NotNull;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,10 +22,13 @@ public class UsersDao {
         });
     }
 
-    public long findIdByLogin(String login) throws SQLException {
+    public Long findIdByLogin(String login) throws SQLException {
         return executor.execQuery("select * from users where user_name='" + login + "'", result -> {
-            result.next();
-            return result.getLong(1);
+            if (result.next()) {
+                return result.getLong(1);
+            } else {
+                return null;
+            }
         });
     }
 

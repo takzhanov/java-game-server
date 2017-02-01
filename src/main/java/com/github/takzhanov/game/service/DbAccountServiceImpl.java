@@ -21,7 +21,11 @@ public class DbAccountServiceImpl implements AccountService {
 
     @Override
     public boolean addUser(UserProfile userProfile) {
-        return (dbService.addUser(userProfile) != -1);
+        if (getUser(userProfile.getLogin()) == null) {
+            return (dbService.addUser(userProfile) != -1);
+        } else {
+            return false;
+        }
     }
 
     @Override
