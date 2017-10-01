@@ -4,8 +4,10 @@ import com.github.takzhanov.game.domain.UserProfile;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MapAccountServiceImpl implements AccountService {
+    private static long userId = 0;
     //имитация пользовательской базы
     private Map<String, UserProfile> users = new HashMap<>();
     //текущие сессии пользователей
@@ -38,11 +40,35 @@ public class MapAccountServiceImpl implements AccountService {
 
     @Override
     public void setUsersLimit(int usersLimit) {
-
     }
 
     @Override
     public int getUsersCount() {
         return users.size();
+    }
+
+    @Override
+    public boolean tryLogin(String login, String password) {
+        if (sessions.containsKey(login)) {
+//            уже авторизован
+            return false;
+        }
+        UserProfile userProfile = users.get(login);
+        if (null != userProfile) {
+            if (Objects.equals(userProfile.getPassword(), password)) {
+                sessions.put(login, userProfile);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean tryRegister(String login, String password) {
+        users.put(login, new UserProfile(userId++, login, password));
+        return true;
     }
 }

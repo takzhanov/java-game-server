@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Authorization</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('login').focus()
+        });
+    </script>
+</head>
+<body>
+
+<form action="/login" method="POST">
+    <label>
+        Login:
+        <input id="login" type="text" name="login">
+    </label>
+    <br/>
+    <label>
+        Password:
+        <input id="password" type="password" name="password">
+    </label>
+    <br/>
+    <input type="submit" value="OK">
+</form>
+
+<p>Last login: ${lastLogin}</p>
+
+</body>
+</html>

@@ -12,7 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <org.eclipse.jetty.version>9.3.7.v20160115</org.eclipse.jetty.version>
+        <org.eclipse.jetty.version>9.4.7.v20170914</org.eclipse.jetty.version>
         <org.freemarker.version>2.3.23</org.freemarker.version>
         <org.slf4j.version>1.7.18</org.slf4j.version>
         <org.apache.logging.log4j.version>2.5</org.apache.logging.log4j.version>
@@ -22,7 +22,22 @@
     <dependencies>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-maven-plugin</artifactId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>${org.eclipse.jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-annotations</artifactId>
+            <version>${org.eclipse.jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-server</artifactId>
+            <version>${org.eclipse.jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-servlet</artifactId>
             <version>${org.eclipse.jetty.version}</version>
         </dependency>
         <dependency>

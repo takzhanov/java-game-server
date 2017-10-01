@@ -38,8 +38,8 @@ public class AdminPageServlet extends HttpServlet {
             System.exit(0);
         }
         pageVariables.put("status", "run");
-        response.getWriter().println(PageGenerator.getPage("admin.tml", pageVariables));
-        response.getWriter().println(accountService.getUsersLimit());
+        pageVariables.put("usersLimit", accountService.getUsersLimit());
+        response.getWriter().println(PageGenerator.getPage("admin.html", pageVariables));
     }
 
 }
