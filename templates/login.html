@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+${message!}
+<hr/>
+Войдите:<br/>
+<form action="/login" method="POST">
+    <label>
+        Login:
+        <input id="login" type="text" name="login" required value="${login!}" autofocus>
+    </label>
+    <br/>
+    <label>
+        Password:
+        <input id="password" type="password" name="password" required>
+    </label>
+    <br/>
+    <input type="submit" value="OK">
+</form>
+</body>
+</html>

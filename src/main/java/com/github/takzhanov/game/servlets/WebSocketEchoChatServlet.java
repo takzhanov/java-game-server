@@ -27,6 +27,6 @@ public class WebSocketEchoChatServlet extends WebSocketServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("chat.html");
+        req.getRequestDispatcher("chat.html").forward(req, resp);
     }
 }

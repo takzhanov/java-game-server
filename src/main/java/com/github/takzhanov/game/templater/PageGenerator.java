@@ -10,14 +10,9 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Map;
 
-public class PageGenerator {
+public abstract class PageGenerator {
     public static final String HTML_DIR = "templates";
     private static final Configuration cfg = new Configuration();
-    private static final PageGenerator pageGenerator = new PageGenerator();
-
-    public static PageGenerator instance() {
-        return pageGenerator;
-    }
 
     public static String getPage(String fileName) {
         return getPage(fileName, null);
@@ -32,8 +27,5 @@ public class PageGenerator {
             e.printStackTrace();
         }
         return stream.toString();
-    }
-
-    private PageGenerator() {
     }
 }
