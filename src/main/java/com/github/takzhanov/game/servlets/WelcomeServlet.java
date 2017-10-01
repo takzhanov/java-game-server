@@ -1,7 +1,6 @@
 package com.github.takzhanov.game.servlets;
 
 import com.github.takzhanov.game.templater.PageGenerator;
-import com.mysql.jdbc.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,12 +19,11 @@ public class WelcomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<String, Object> pageVariables = new HashMap<>();
         HttpSession session = req.getSession();
-        String login = (String) session.getAttribute("login");
-        String lastMessage = (String) session.getAttribute("lastMessage");
-        pageVariables.put("lastMessage", StringUtils.isEmptyOrWhitespaceOnly(lastMessage) ? "" : lastMessage);
-        pageVariables.put("status", null == login ? "Вы не авторизованы" : String.format("Добро пожаловат, %s", login));
+        String login = (String) session.getAttribute("login"); //TODO из сессий
+        Map<String, Object> pageVariables = new HashMap<>();
+        pageVariables
+                .put("greeting", null == login ? "Вы не авторизованы" : String.format("Добро пожаловат, %s", login));
         resp.setContentType("text/html;charset=utf-8");
         resp.getWriter().println(PageGenerator.getPage("welcome.html", pageVariables));
     }

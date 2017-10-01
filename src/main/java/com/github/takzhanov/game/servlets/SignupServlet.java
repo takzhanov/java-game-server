@@ -17,7 +17,7 @@ import java.util.Map;
 public class SignupServlet extends HttpServlet {
     public static final String PAGE_URL = "/signup";
 
-    private AccountService accountService;
+    private final AccountService accountService;
 
     public SignupServlet(AccountService accountService) {
         this.accountService = accountService;
@@ -27,6 +27,7 @@ public class SignupServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, Object> pageVariables = new HashMap<>();
         pageVariables.put("message", req.getAttribute("message"));
+        pageVariables.put("login", req.getParameter("login"));
         resp.setContentType("text/html;charset=utf-8");
         resp.getWriter().println(PageGenerator.getPage("signup.html", pageVariables));
     }

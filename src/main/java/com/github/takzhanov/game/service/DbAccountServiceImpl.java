@@ -1,19 +1,15 @@
 package com.github.takzhanov.game.service;
 
+import com.github.takzhanov.game.db.DbException;
 import com.github.takzhanov.game.db.DbService;
 import com.github.takzhanov.game.domain.UserProfile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class DbAccountServiceImpl implements AccountService {
-    private int usersLimit = 10;
-    private int usersCount;
-
+public class DbAccountServiceImpl extends AbstractAccountService {
+    private final Logger logger = LoggerFactory.getLogger(DbAccountServiceImpl.class);
     //пользовательской базы
-    private DbService dbService;
-    //текущие сессии пользователей
-    private Map<String, UserProfile> sessions = new HashMap<>();
+    private final DbService dbService;
 
     public DbAccountServiceImpl(DbService dbService) {
         this.dbService = dbService;
@@ -30,26 +26,17 @@ public class DbAccountServiceImpl implements AccountService {
 
     @Override
     public UserProfile getUser(String login) {
-        return dbService.findUserByLogin(login);
+        try {
+            return dbService.findUserByLogin(login);
+        } catch (DbException e) {
+            logger.info("User not found"); //TODO не замалчивать
+            return null;
+        }
     }
 
     @Override
-    public UserProfile getSession(String sessionId) {
-        return sessions.get(sessionId);
-    }
-
-    @Override
-    public int getUsersLimit() {
-        return this.usersLimit;
-    }
-
-    @Override
-    public void setUsersLimit(int usersLimit) {
-        this.usersLimit = usersLimit >= 0 ? usersLimit : 0;
-    }
-
-    @Override
-    public int getUsersCount() {
-        return this.usersCount;
+    public boolean tryRegister(String login, String password) {
+        UserProfile newUser = new UserProfile(-1, login, password);
+        return addUser(newUser);
     }
 }
