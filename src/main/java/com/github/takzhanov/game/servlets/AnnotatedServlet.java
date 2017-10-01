@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//TODO анотации не работают
 @WebServlet(urlPatterns = "/xxx")
 public class AnnotatedServlet extends HttpServlet {
     @Override

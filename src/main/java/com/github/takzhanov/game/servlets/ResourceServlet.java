@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ResourceServlet extends HttpServlet {
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(ResourceServlet.class);
     public static final String PAGE_URL = "/resources";
-    private ResourceService resourceService;
+    private final ResourceService resourceService;
 
     public ResourceServlet(ResourceService resourceService) {
         this.resourceService = resourceService;

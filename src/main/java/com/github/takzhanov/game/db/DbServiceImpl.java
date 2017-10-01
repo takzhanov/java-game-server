@@ -11,7 +11,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DbServiceImpl implements DbService {
-    private final static Logger logger = LoggerFactory.getLogger(DbServiceImpl.class.getClass());
+    private final static Logger logger = LoggerFactory.getLogger(DbServiceImpl.class);
     private final Connection connection;
 
     static {
@@ -93,8 +93,8 @@ public class DbServiceImpl implements DbService {
     static Connection getH2Connection() {
         try {
             String url = "jdbc:h2:./h2db";
-            String name = "tully";
-            String pass = "tully";
+            String name = "jorj";
+            String pass = "jorj";
 
             return DriverManager.getConnection(url, name, pass);
         } catch (SQLException e) {

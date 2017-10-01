@@ -34,7 +34,7 @@ public class AdminPageServlet extends HttpServlet {
             int timeMS = Integer.valueOf(timeString);
             logger.info("Server will be down after: " + timeMS + " ms");
             TimeHelper.sleep(timeMS);
-            logger.info("\nShutdown");
+            logger.info("Shutdown");
             System.exit(0);
         }
         pageVariables.put("status", "run");

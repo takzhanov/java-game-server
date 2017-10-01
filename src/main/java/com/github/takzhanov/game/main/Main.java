@@ -27,8 +27,8 @@ public class Main {
 
         DbService dbService = new DbServiceImpl();
         dbService.printConnectionInfo();
-//        AccountService accountService = new DbAccountServiceImpl(dbService);
-        AccountService accountService = new MapAccountServiceImpl();
+        AccountService accountService = new DbAccountServiceImpl(dbService);
+//        AccountService accountService = new MapAccountServiceImpl();
 
         AccountUserControllerMBean statServer = new AccountUserController(accountService);
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
@@ -49,6 +49,7 @@ public class Main {
         context.addServlet(new ServletHolder(new WelcomeServlet()), WelcomeServlet.PAGE_URL);
         context.addServlet(new ServletHolder(new LoginServlet(accountService)), LoginServlet.PAGE_URL);
         context.addServlet(new ServletHolder(new SignupServlet(accountService)), SignupServlet.PAGE_URL);
+        context.addServlet(new ServletHolder(new HomeServlet(accountService)), HomeServlet.PAGE_URL);
         context.addServlet(new ServletHolder(new StatusServlet()), StatusServlet.PAGE_URL);
 
         Server server = new Server(port);

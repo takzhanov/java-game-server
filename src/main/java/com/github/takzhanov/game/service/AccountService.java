@@ -2,12 +2,10 @@ package com.github.takzhanov.game.service;
 
 import com.github.takzhanov.game.domain.UserProfile;
 
-import java.util.Objects;
-
 public interface AccountService {
     boolean addUser(UserProfile userProfile);
 
-    UserProfile getUser(String userName);
+    UserProfile getUser(String login);
 
     UserProfile getSession(String sessionId);
 
@@ -17,11 +15,7 @@ public interface AccountService {
 
     int getUsersCount();
 
-    default boolean tryLogin(String login, String password) {
-        return Objects.equals(login, password);
-    }
+    boolean tryLogin(String login, String password);
 
-    default boolean tryRegister(String login, String password) {
-        return true;
-    }
+    boolean tryRegister(String login, String password);
 }

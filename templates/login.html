@@ -7,7 +7,6 @@
 <body>
 ${message!}
 <hr/>
-Войдите:<br/>
 <form action="/login" method="POST">
     <label>
         Login:
@@ -19,7 +18,9 @@ ${message!}
         <input id="password" type="password" name="password" required>
     </label>
     <br/>
-    <input type="submit" value="OK">
+    <input type="submit" value="Login">
 </form>
+<hr/>
+<a href="signup?login=${login!}">Registration</a>
 </body>
 </html>
