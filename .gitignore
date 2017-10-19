@@ -8,6 +8,6 @@
 *.iml
 .idea/
 out/
+target/
 
-h2db.mv.db
-
+h2db.*

@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
+    <title>Login</title>
 </head>
 <body>
 ${message!}
 <hr/>
-Create new user:<br/>
-<form action="/signup" method="POST">
+Authorize:<br/>
+<form action="/login" method="POST">
     <label>
         Login:
-        <input id="login" type="text" name="login" value="${login!}" autofocus required>
+        <input id="login" type="text" name="login" required value="${login!}" autofocus>
     </label>
     <br/>
     <label>
@@ -19,9 +19,10 @@ Create new user:<br/>
         <input id="password" type="password" name="password" required>
     </label>
     <br/>
-    <input type="submit" value="Create">
+    <input type="submit" value="Login">
 </form>
 <hr/>
+<a href="signup?login=${login!}">Registration</a>
 <br/><a href="/">Main</a>
 </body>
 </html>
