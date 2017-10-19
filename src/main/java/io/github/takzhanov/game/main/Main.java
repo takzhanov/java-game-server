@@ -15,7 +15,7 @@ import javax.management.ObjectName;
 import java.lang.management.ManagementFactory;
 
 public class Main {
-    final static Logger logger = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws Exception {
         int port = 8080;
@@ -23,7 +23,7 @@ public class Main {
             String portString = args[0];
             port = Integer.valueOf(portString);
         }
-        logger.info("Starting at port: {}", String.valueOf(port));
+        LOGGER.info("Starting at port: {}", String.valueOf(port));
 
         DbService dbService = new DbServiceImpl();
         dbService.printConnectionInfo();
@@ -43,7 +43,7 @@ public class Main {
         context.setResourceBase("static");
 //        context.setConfigurations(new Configuration[]{new AnnotationConfiguration()});
         context.addServlet(new ServletHolder(new MirrorServlet()), MirrorServlet.PAGE_URL);
-        context.addServlet(new ServletHolder(new WebSocketEchoChatServlet()), "/chat");
+        context.addServlet(new ServletHolder(new WebSocketEchoChatServlet()), WebSocketEchoChatServlet.PAGE_URL);
         context.addServlet(new ServletHolder(new AdminPageServlet(accountService)), AdminPageServlet.PAGE_URL);
         context.addServlet(new ServletHolder(new ResourceServlet(resourceService)), ResourceServlet.PAGE_URL);
         context.addServlet(new ServletHolder(new WelcomeServlet()), WelcomeServlet.PAGE_URL);
@@ -55,8 +55,8 @@ public class Main {
         Server server = new Server(port);
         server.setHandler(context);
         server.start();
-        logger.debug(server.dump());
-        logger.info("Server started");
+        LOGGER.debug(server.dump());
+        LOGGER.info("Server started");
         server.join();
     }
 }

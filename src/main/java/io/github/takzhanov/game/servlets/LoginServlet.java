@@ -44,6 +44,7 @@ public class LoginServlet extends HttpServlet {
             Map<String, Object> pageVariables = new HashMap<>();
             pageVariables.put("message", "Логин или пароль не верный");
             pageVariables.put("login", login);
+            resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             resp.setContentType("text/html;charset=utf-8");
             resp.getWriter().println(PageGenerator.getPage("login.tml", pageVariables));
         }

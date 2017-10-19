@@ -12,7 +12,8 @@ import java.io.IOException;
 
 //@WebServlet(name = "WebSocketEchoChatServlet", urlPatterns = {"/chat"})
 public class WebSocketEchoChatServlet extends WebSocketServlet {
-    private final static int LOGOUT_TIME = 10 * 60 * 1000;
+    public static final String PAGE_URL = "/chat";
+    private static final int LOGOUT_TIME = 10 * 60 * 1000;
     private final ChatService chatService;
 
     public WebSocketEchoChatServlet() {

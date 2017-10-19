@@ -1,6 +1,8 @@
 package io.github.takzhanov.game.service;
 
 import io.github.takzhanov.game.domain.UserProfile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.Objects;
@@ -8,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class AbstractAccountService implements AccountService {
+    protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     //текущие сессии пользователей
     private final Map<String, UserProfile> sessions = new ConcurrentHashMap<>();
     private final AtomicInteger usersLimit = new AtomicInteger(0);
@@ -37,18 +40,21 @@ public abstract class AbstractAccountService implements AccountService {
     @Override
     public boolean tryLogin(String login, String password) {
         if (sessions.containsKey(login)) {
-//            уже авторизован
+            LOGGER.debug("User {} authorized already", login);
             return false;
         }
         UserProfile userProfile = getUser(login);
         if (null != userProfile) {
             if (Objects.equals(userProfile.getPassword(), password)) {
                 sessions.put(login, userProfile);
+                LOGGER.info("User {} login", login);
                 return true;
             } else {
+                LOGGER.debug("Try authorize for user {}", login);
                 return false;
             }
         } else {
+            LOGGER.debug("Unknown user {}", login);
             return false;
         }
     }
