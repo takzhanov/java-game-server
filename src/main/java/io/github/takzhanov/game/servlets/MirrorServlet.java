@@ -1,11 +1,14 @@
 package io.github.takzhanov.game.servlets;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
+@WebServlet(urlPatterns = MirrorServlet.PAGE_URL)
 public class MirrorServlet extends HttpServlet {
     public static final String PAGE_URL = "/mirror";
 

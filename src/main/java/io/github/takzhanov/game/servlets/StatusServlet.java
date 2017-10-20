@@ -3,6 +3,7 @@ package io.github.takzhanov.game.servlets;
 import io.github.takzhanov.game.templater.PageGenerator;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@WebServlet(urlPatterns = StatusServlet.PAGE_URL)
 public class StatusServlet extends HttpServlet {
     public static final String PAGE_URL = "/status";
 

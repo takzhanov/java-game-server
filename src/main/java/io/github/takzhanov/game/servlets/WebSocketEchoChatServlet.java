@@ -6,11 +6,13 @@ import org.eclipse.jetty.websocket.servlet.WebSocketServlet;
 import org.eclipse.jetty.websocket.servlet.WebSocketServletFactory;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@WebServlet(name = "WebSocketEchoChatServlet", urlPatterns = {"/chat"})
+
+@WebServlet(urlPatterns = WebSocketEchoChatServlet.PAGE_URL)
 public class WebSocketEchoChatServlet extends WebSocketServlet {
     public static final String PAGE_URL = "/chat";
     private static final int LOGOUT_TIME = 10 * 60 * 1000;

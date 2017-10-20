@@ -1,9 +1,11 @@
 package io.github.takzhanov.game.servlets;
 
+import io.github.takzhanov.game.context.ApplicationContext;
 import io.github.takzhanov.game.service.AccountService;
 import io.github.takzhanov.game.templater.PageGenerator;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,10 +16,15 @@ import java.util.Map;
 /**
  * Обработчик формы входа
  */
+@WebServlet(urlPatterns = LoginServlet.PAGE_URL)
 public class LoginServlet extends HttpServlet {
     public static final String PAGE_URL = "/login";
 
     private AccountService accountService;
+
+    public LoginServlet() {
+        this(ApplicationContext.get(AccountService.class));
+    }
 
     public LoginServlet(AccountService accountService) {
         this.accountService = accountService;

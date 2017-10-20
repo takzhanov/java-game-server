@@ -1,10 +1,12 @@
 package io.github.takzhanov.game.servlets;
 
+import io.github.takzhanov.game.context.ApplicationContext;
 import io.github.takzhanov.game.domain.UserProfile;
 import io.github.takzhanov.game.service.AccountService;
 import io.github.takzhanov.game.templater.PageGenerator;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,10 +17,15 @@ import java.util.Map;
 /**
  * Строит домашнюю страничку
  */
+@WebServlet(urlPatterns = HomeServlet.PAGE_URL)
 public class HomeServlet extends HttpServlet {
     public static final String PAGE_URL = "/home";
 
     private final AccountService accountService;
+
+    public HomeServlet() {
+        this(ApplicationContext.get(AccountService.class));
+    }
 
     public HomeServlet(AccountService accountService) {
         this.accountService = accountService;

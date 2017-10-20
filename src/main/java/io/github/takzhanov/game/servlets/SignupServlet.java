@@ -1,9 +1,11 @@
 package io.github.takzhanov.game.servlets;
 
+import io.github.takzhanov.game.context.ApplicationContext;
 import io.github.takzhanov.game.service.AccountService;
 import io.github.takzhanov.game.templater.PageGenerator;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,10 +16,15 @@ import java.util.Map;
 /**
  * Обработчик регистрации нового пользователя
  */
+@WebServlet(urlPatterns = SignupServlet.PAGE_URL)
 public class SignupServlet extends HttpServlet {
     public static final String PAGE_URL = "/signup";
 
     private final AccountService accountService;
+
+    public SignupServlet() {
+        this(ApplicationContext.get(AccountService.class));
+    }
 
     public SignupServlet(AccountService accountService) {
         this.accountService = accountService;

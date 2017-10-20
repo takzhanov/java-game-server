@@ -3,6 +3,7 @@ package io.github.takzhanov.game.servlets;
 import io.github.takzhanov.game.templater.PageGenerator;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import java.util.Map;
 /**
  * Отвечает за отрисовку приветственной странички со статусами
  */
+@WebServlet(urlPatterns = WelcomeServlet.PAGE_URL)
 public class WelcomeServlet extends HttpServlet {
     public static final String PAGE_URL = "/welcome";
 
